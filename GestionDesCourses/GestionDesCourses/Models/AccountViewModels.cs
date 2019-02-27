@@ -81,17 +81,17 @@ namespace GestionDesCourses.Models
         public string ConfirmPassword { get; set; }
 
         [Required]
-        [StringLength(50)]
+        [StringLength(100, ErrorMessage = "La chaîne {0} doit comporter au moins {2} caractères.", MinimumLength = 2)]
         [Display(Name = "Prenom")]
         public string FirstName { get; set; }
 
         [Required]
-        [StringLength(50)]
+        [StringLength(100, ErrorMessage = "La chaîne {0} doit comporter au moins {2} caractères.", MinimumLength = 2)]
         [Display(Name = "Nom")]
         public string LastName { get; set; }
 
         [Required]
-        [StringLength(10)]
+        [StringLength(10, ErrorMessage = "La chaîne {0} doit comporter au moins {2} caractères.", MinimumLength = 10)]
         [Display(Name = "N de telephone")]
         public string Phone { get; set; }
     }
