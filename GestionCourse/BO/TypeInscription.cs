@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BO
 {
-    class TypeInscription
+    public class TypeInscription
     {
     }
 }
