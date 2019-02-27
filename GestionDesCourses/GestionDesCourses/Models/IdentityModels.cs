@@ -28,6 +28,5 @@ namespace GestionDesCourses.Models
         public string RoleAdministrateur { get; set; }
         public string RoleSuperAdministrateur { get; set; }
     }
-
-   
+      
 }
