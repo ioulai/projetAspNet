@@ -6,7 +6,15 @@ using System.Threading.Tasks;
 
 namespace BO
 {
-    class Category
+    public class Category
     {
+        public int Id { get; set; }
+        public string Title { get; set; }
+
+        public Category()
+        {
+
+        }
+
     }
 }
