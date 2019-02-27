@@ -9,7 +9,7 @@ namespace GestionDesCourses.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
-            : base("DefaultConnection", throwIfV1Schema: false)
+            : base("ContextGestionCourse", throwIfV1Schema: false)
         {
         }
 
