@@ -267,7 +267,7 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\GestionCourse\BO\BO.csproj">
+    <ProjectReference Include="..\..\BO\BO.csproj">
       <Project>{1868ce0b-58d3-47e7-98af-48e6aedf74f9}</Project>
       <Name>BO</Name>
     </ProjectReference>
