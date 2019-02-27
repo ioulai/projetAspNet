@@ -73,6 +73,9 @@ _[Ss]cripts
 *.nupkg
 *.ncrunchsolution
 *.dot[Cc]over
+
+*.config
+
 GestionCourse/.vs/config/applicationhost.config
 GestionCourse/GestionCourse/Web.config
 GestionCourse/GestionCourse/Migrations/201902270918114_premiereMigrationMariam.cs
