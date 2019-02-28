@@ -16,7 +16,7 @@ namespace GestionDesCourses.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         private static List<Category> lesCategoriesDispo;
-        private static List<Race> lesCourses;
+        private static IEnumerable<Race> lesCourses;
 
 
         public RacesController()
@@ -25,33 +25,28 @@ namespace GestionDesCourses.Controllers
             {
                 lesCategoriesDispo = db.Categories.ToList();
             }
-
-            if(lesCourses == null)
-            {
-                lesCourses = db.Races.ToList();
-            }
+            
         }
 
         // GET: Races
         public ActionResult Index()
         {
-            var courses = lesCourses;
 
-            return View(courses);
+            return View(db.Races.Include(c => c.Category));
         }
 
         // GET: Races/Details/5
         public ActionResult Details(int? id)
         {
-            RaceViewModel raceVM = new RaceViewModel();
-            raceVM.Race = lesCourses.SingleOrDefault(c => c.Id == id);
 
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            
-           
+
+            RaceViewModel raceVM = new RaceViewModel();
+            raceVM.Race = db.Races.Include(c => c.Category).SingleOrDefault(c => c.Id == id);
+
             return View(raceVM);
         }
 
@@ -59,9 +54,10 @@ namespace GestionDesCourses.Controllers
         public ActionResult Create()
         {
             // cration du ViewModel nécessaire pour porter la liste des catégories et l'id de la categorie choisie en plus de la course
-            var vm = new RaceViewModel();
-            vm.Categories = lesCategoriesDispo;
-            return View(vm);
+            var raceVM = new RaceViewModel();
+            raceVM.Categories = lesCategoriesDispo;
+
+            return View(raceVM);
         }
 
         // POST: Races/Create
@@ -98,21 +94,22 @@ namespace GestionDesCourses.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Race race = db.Races.Find(id);
+
+            Race race = db.Races.Include(c => c.Category).SingleOrDefault(c => c.Id == id);
             if (race == null)
             {
                 return HttpNotFound();
             }
-            var vm = new RaceViewModel();
-            vm.Categories = lesCategoriesDispo;
-            vm.Race = race;
+            var raceVM = new RaceViewModel();
+            raceVM.Categories = lesCategoriesDispo;
+            raceVM.Race = race;
 
             if (race.Category != null)
             {
                 // Si la course avait une catégorie, on affecte l'Id de cette catégorie à notre ViewModel, ansi elle sera préselectionnée dans notre liste de catégories
-                vm.IdSelectedCategory = race.Category.Id;
+                raceVM.IdSelectedCategory = race.Category.Id;
             }
-            return View(vm);
+            return View(raceVM);
             
         }
 
@@ -121,15 +118,38 @@ namespace GestionDesCourses.Controllers
         // plus de détails, voir  http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,DateEnd,DateStart,Description,Price,Title,ZipCode")] Race race)
+        public ActionResult Edit(RaceViewModel raceVM)
         {
-            if (ModelState.IsValid)
+        /*    if (ModelState.IsValid)
             {
-                db.Entry(race).State = EntityState.Modified;
+                
+                db.Entry(raceVM.Race).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(race);
+            return View(raceVM);
+*/
+            if (ModelState.IsValid)
+            {
+                var racedb = db.Races.Include(z => z.Category).FirstOrDefault(i => i.Id == raceVM.Race.Id);
+                racedb.Title = raceVM.Race.Title;
+                racedb.Category = null;
+                if (raceVM.IdSelectedCategory.HasValue)
+                {
+                    racedb.Category = db.Categories.FirstOrDefault(a => a.Id == raceVM.IdSelectedCategory.Value);
+                }
+                racedb.DateStart = raceVM.Race.DateStart;
+                racedb.DateEnd = raceVM.Race.DateEnd;
+                racedb.Description = raceVM.Race.Description;
+                racedb.Price = raceVM.Race.Price;
+                racedb.ZipCode = raceVM.Race.ZipCode;
+                // pareil pour inscriptions etc...
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            raceVM.Categories = db.Categories.ToList(); //???
+            return View(raceVM);
+            
         }
 
         // GET: Races/Delete/5
@@ -139,7 +159,7 @@ namespace GestionDesCourses.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Race race = db.Races.Find(id);
+            Race race = db.Races.Include(c => c.Category).SingleOrDefault(c => c.Id == id);  //db.Races.Find(id);
             if (race == null)
             {
                 return HttpNotFound();
