@@ -15,25 +15,44 @@ namespace GestionDesCourses.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
+        private static List<Category> lesCategoriesDispo;
+        private static List<Race> lesCourses;
+
+
+        public RacesController()
+        {
+            if(lesCategoriesDispo == null)
+            {
+                lesCategoriesDispo = db.Categories.ToList();
+            }
+
+            if(lesCourses == null)
+            {
+                lesCourses = db.Races.ToList();
+            }
+        }
+
         // GET: Races
         public ActionResult Index()
         {
-            return View(db.Races.ToList());
+            var courses = lesCourses;
+
+            return View(courses);
         }
 
         // GET: Races/Details/5
         public ActionResult Details(int? id)
         {
+            RaceViewModel raceVM = new RaceViewModel();
+            raceVM.Race = lesCourses.SingleOrDefault(c => c.Id == id);
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Race race = db.Races.Find(id);
-            if (race == null)
-            {
-                return HttpNotFound();
-            }
-            return View(race);
+            
+           
+            return View(raceVM);
         }
 
         // GET: Races/Create
@@ -41,7 +60,7 @@ namespace GestionDesCourses.Controllers
         {
             // cration du ViewModel nécessaire pour porter la liste des catégories et l'id de la categorie choisie en plus de la course
             var vm = new RaceViewModel();
-            vm.Categories = db.Categories.ToList();
+            vm.Categories = lesCategoriesDispo;
             return View(vm);
         }
 
@@ -50,7 +69,7 @@ namespace GestionDesCourses.Controllers
         // plus de détails, voir  http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,DateEnd,DateStart,Description,Price,Title,ZipCode")] RaceViewModel raceVM)
+        public ActionResult Create(RaceViewModel raceVM)
         {
             if (ModelState.IsValid)
             {
@@ -68,7 +87,7 @@ namespace GestionDesCourses.Controllers
 
                 
             }
-            raceVM.Categories = db.Categories.ToList();
+            raceVM.Categories = lesCategoriesDispo;
             return View(raceVM);
         }
 
@@ -85,7 +104,7 @@ namespace GestionDesCourses.Controllers
                 return HttpNotFound();
             }
             var vm = new RaceViewModel();
-            vm.Categories = db.Categories.ToList();
+            vm.Categories = lesCategoriesDispo;
             vm.Race = race;
 
             if (race.Category != null)

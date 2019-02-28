@@ -27,7 +27,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Race.Category, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownListFor(model => model.IdSelectedCategory, Model.Categories.Select(a => new SelectListItem { Text = a.Title, Value = a.Id.ToString() }), "Aucune catégorie", new { htmlAttributes = new { @class = "form-control" } })
+                @Html.DropDownListFor(model => model.IdSelectedCategory, Model.Categories.Select(a => new SelectListItem { Text = a.Title, Value = a.Id.ToString() }),  new { htmlAttributes = new { @class = "form-control" } })
             </div>
         </div>
 
@@ -81,7 +81,7 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Retour à la liste", "Index")
 </div>
 
 @section Scripts {
