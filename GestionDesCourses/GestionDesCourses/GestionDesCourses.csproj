@@ -172,16 +172,25 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\DisplayConfigurationsController.cs" />
+    <Compile Include="Controllers\GestionUserController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\RacesController.cs" />
     <Compile Include="Controllers\UniteDistancesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+<<<<<<< HEAD
     <Compile Include="Migrations\201902271445005_create.cs" />
     <Compile Include="Migrations\201902271445005_create.Designer.cs">
       <DependentUpon>201902271445005_create.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201902280857070_testRace.cs" />
+    <Compile Include="Migrations\201902280857070_testRace.Designer.cs">
+      <DependentUpon>201902280857070_testRace.cs</DependentUpon>
+    </Compile>
+=======
+>>>>>>> ce1050ff8f4054319745715ddd1e971cf7d8fb26
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
@@ -261,6 +270,19 @@
     <Content Include="Views\UniteDistances\Details.cshtml" />
     <Content Include="Views\UniteDistances\Edit.cshtml" />
     <Content Include="Views\UniteDistances\Index.cshtml" />
+<<<<<<< HEAD
+    <Content Include="Views\GestionUser\Create.cshtml" />
+    <Content Include="Views\GestionUser\Delete.cshtml" />
+    <Content Include="Views\GestionUser\Details.cshtml" />
+    <Content Include="Views\GestionUser\Edit.cshtml" />
+    <Content Include="Views\GestionUser\Index.cshtml" />
+=======
+    <Content Include="Views\Races\Create.cshtml" />
+    <Content Include="Views\Races\Delete.cshtml" />
+    <Content Include="Views\Races\Details.cshtml" />
+    <Content Include="Views\Races\Edit.cshtml" />
+    <Content Include="Views\Races\Index.cshtml" />
+>>>>>>> ce1050ff8f4054319745715ddd1e971cf7d8fb26
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -279,11 +301,17 @@
       <Name>BO</Name>
     </ProjectReference>
   </ItemGroup>
+<<<<<<< HEAD
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201902271445005_create.resx">
       <DependentUpon>201902271445005_create.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902280857070_testRace.resx">
+      <DependentUpon>201902280857070_testRace.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
+=======
+>>>>>>> ce1050ff8f4054319745715ddd1e971cf7d8fb26
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

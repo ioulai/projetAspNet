@@ -23,5 +23,11 @@ namespace GestionDesCourses.Models
         public System.Data.Entity.DbSet<BO.DisplayConfiguration> DisplayConfigurations { get; set; }
 
         public System.Data.Entity.DbSet<BO.UniteDistance> UniteDistances { get; set; }
+
+<<<<<<< HEAD
+        public System.Data.Entity.DbSet<GestionDesCourses.Models.ApplicationUser> ApplicationUsers { get; set; }
+=======
+        public System.Data.Entity.DbSet<BO.Race> Races { get; set; }
+>>>>>>> ce1050ff8f4054319745715ddd1e971cf7d8fb26
     }
 }

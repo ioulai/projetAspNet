@@ -3,7 +3,7 @@ namespace GestionDesCourses.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class create : DbMigration
+    public partial class Mariam : DbMigration
     {
         public override void Up()
         {
@@ -26,6 +26,49 @@ namespace GestionDesCourses.Migrations
                         SpeedMax = c.Boolean(nullable: false),
                     })
                 .PrimaryKey(t => t.Id);
+            
+            CreateTable(
+                "dbo.Races",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        DateEnd = c.DateTime(nullable: false),
+                        DateStart = c.DateTime(nullable: false),
+                        Description = c.String(),
+                        Price = c.Single(nullable: false),
+                        Title = c.String(),
+                        ZipCode = c.String(),
+                        Category_Id = c.Int(),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.Categories", t => t.Category_Id)
+                .Index(t => t.Category_Id);
+            
+            CreateTable(
+                "dbo.Inscriptions",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        Amount = c.Single(nullable: false),
+                        IdentityModelId = c.Int(nullable: false),
+                        RaceId = c.Int(nullable: false),
+                        TypeInscriptionId = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.Races", t => t.RaceId, cascadeDelete: true)
+                .Index(t => t.RaceId);
+            
+            CreateTable(
+                "dbo.Pois",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        Description = c.String(),
+                        Race_Id = c.Int(),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.Races", t => t.Race_Id)
+                .Index(t => t.Race_Id);
             
             CreateTable(
                 "dbo.AspNetRoles",
@@ -119,18 +162,27 @@ namespace GestionDesCourses.Migrations
             DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
+            DropForeignKey("dbo.Pois", "Race_Id", "dbo.Races");
+            DropForeignKey("dbo.Inscriptions", "RaceId", "dbo.Races");
+            DropForeignKey("dbo.Races", "Category_Id", "dbo.Categories");
             DropIndex("dbo.AspNetUserLogins", new[] { "UserId" });
             DropIndex("dbo.AspNetUserClaims", new[] { "UserId" });
             DropIndex("dbo.AspNetUsers", "UserNameIndex");
             DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
             DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
             DropIndex("dbo.AspNetRoles", "RoleNameIndex");
+            DropIndex("dbo.Pois", new[] { "Race_Id" });
+            DropIndex("dbo.Inscriptions", new[] { "RaceId" });
+            DropIndex("dbo.Races", new[] { "Category_Id" });
             DropTable("dbo.AspNetUserLogins");
             DropTable("dbo.AspNetUserClaims");
             DropTable("dbo.AspNetUsers");
             DropTable("dbo.UniteDistances");
             DropTable("dbo.AspNetUserRoles");
             DropTable("dbo.AspNetRoles");
+            DropTable("dbo.Pois");
+            DropTable("dbo.Inscriptions");
+            DropTable("dbo.Races");
             DropTable("dbo.DisplayConfigurations");
             DropTable("dbo.Categories");
         }
