@@ -179,10 +179,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201902280836036_second.cs" />
-    <Compile Include="Migrations\201902280836036_second.Designer.cs">
-      <DependentUpon>201902280836036_second.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
@@ -284,11 +280,6 @@
       <Project>{1868ce0b-58d3-47e7-98af-48e6aedf74f9}</Project>
       <Name>BO</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201902280836036_second.resx">
-      <DependentUpon>201902280836036_second.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
