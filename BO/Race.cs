@@ -14,7 +14,7 @@ namespace BO
         public DateTime DateStart { get; set; }
         public string Description { get; set; }
         public List<Inscription> Inscriptions { get; set; }
-        public List<Poi> Pois { get; set; }
+        //public List<Poi> Pois { get; set; }
         public float Price { get; set; }
         public string Title { get; set; }
         public string ZipCode { get; set; }
