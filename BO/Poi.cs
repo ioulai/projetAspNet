@@ -8,5 +8,7 @@ namespace BO
 {
     public class Poi
     {
+        public int Id { get; set; }
+        public string Description { get; set; }
     }
 }
