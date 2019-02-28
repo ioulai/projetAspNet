@@ -6,14 +6,14 @@ namespace GestionDesCourses.Migrations
     using System.Data.Entity.Migrations.Infrastructure;
     using System.Resources;
     
-    [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class second : IMigrationMetadata
+    [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
+    public sealed partial class Mariam : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(second));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(Mariam));
         
         string IMigrationMetadata.Id
         {
-            get { return "201902280836036_second"; }
+            get { return "201902280959393_Mariam"; }
         }
         
         string IMigrationMetadata.Source
