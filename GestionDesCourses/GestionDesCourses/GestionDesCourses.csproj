@@ -183,6 +183,10 @@
     <Compile Include="Migrations\201902280959393_Mariam.Designer.cs">
       <DependentUpon>201902280959393_Mariam.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201902280952323_MAJ_EF.cs" />
+    <Compile Include="Migrations\201902280952323_MAJ_EF.Designer.cs">
+      <DependentUpon>201902280952323_MAJ_EF.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
@@ -288,6 +292,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201902280959393_Mariam.resx">
       <DependentUpon>201902280959393_Mariam.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902280952323_MAJ_EF.resx">
+      <DependentUpon>201902280952323_MAJ_EF.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
