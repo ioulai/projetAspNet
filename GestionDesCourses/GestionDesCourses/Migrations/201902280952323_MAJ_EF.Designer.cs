@@ -6,14 +6,14 @@ namespace GestionDesCourses.Migrations
     using System.Data.Entity.Migrations.Infrastructure;
     using System.Resources;
     
-    [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class create : IMigrationMetadata
+    [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
+    public sealed partial class MAJ_EF : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(create));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(MAJ_EF));
         
         string IMigrationMetadata.Id
         {
-            get { return "201902271445005_create"; }
+            get { return "201902280952323_MAJ_EF"; }
         }
         
         string IMigrationMetadata.Source
