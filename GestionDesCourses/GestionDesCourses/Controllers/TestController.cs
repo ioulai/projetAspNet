@@ -6,112 +6,112 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using BO;
 using GestionDesCourses.Models;
 
 namespace GestionDesCourses.Controllers
 {
-    public class GestionUserController : Controller
+    public class TestController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: GestionUser
+        // GET: Test
         public ActionResult Index()
         {
-            return View(db.ApplicationUsers.ToList());
+            return View(db.TypeInscriptions.ToList());
         }
 
-        // GET: GestionUser/Details/5
-        public ActionResult Details(string id)
+        // GET: Test/Details/5
+        public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ApplicationUser applicationUser = db.ApplicationUsers.Find(id);
-            if (applicationUser == null)
+            TypeInscription typeInscription = db.TypeInscriptions.Find(id);
+            if (typeInscription == null)
             {
                 return HttpNotFound();
             }
-            return View(applicationUser);
+            return View(typeInscription);
         }
 
-        // GET: GestionUser/Create
+        // GET: Test/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: GestionUser/Create
+        // POST: Test/Create
         // Afin de déjouer les attaques par sur-validation, activez les propriétés spécifiques que vous voulez lier. Pour 
         // plus de détails, voir  http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,FirstName,LastName,Phone,BirthDate,RoleUser,RoleAdministrateur,RoleSuperAdministrateur,Email,EmailConfirmed,PasswordHash,SecurityStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEndDateUtc,LockoutEnabled,AccessFailedCount,UserName")] ApplicationUser applicationUser)
+        public ActionResult Create([Bind(Include = "Id,Description")] TypeInscription typeInscription)
         {
             if (ModelState.IsValid)
             {
-                db.ApplicationUsers.Add(applicationUser);
+                db.TypeInscriptions.Add(typeInscription);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(applicationUser);
+            return View(typeInscription);
         }
 
-        // GET: GestionUser/Edit/5
-        public ActionResult Edit(string id)
+        // GET: Test/Edit/5
+        public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ApplicationUser applicationUser = db.ApplicationUsers.Find(id);
-            if (applicationUser == null)
+            TypeInscription typeInscription = db.TypeInscriptions.Find(id);
+            if (typeInscription == null)
             {
                 return HttpNotFound();
             }
-            return View(applicationUser);
+            return View(typeInscription);
         }
 
-        // POST: GestionUser/Edit/5
+        // POST: Test/Edit/5
         // Afin de déjouer les attaques par sur-validation, activez les propriétés spécifiques que vous voulez lier. Pour 
         // plus de détails, voir  http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,FirstName,LastName,Phone,BirthDate,RoleUser,RoleAdministrateur,RoleSuperAdministrateur,Email,EmailConfirmed,PasswordHash,SecurityStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEndDateUtc,LockoutEnabled,AccessFailedCount,UserName")] ApplicationUser applicationUser)
+        public ActionResult Edit([Bind(Include = "Id,Description")] TypeInscription typeInscription)
         {
             if (ModelState.IsValid)
             {
-
-                db.Entry(applicationUser).State = EntityState.Modified;
+                db.Entry(typeInscription).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(applicationUser);
+            return View(typeInscription);
         }
 
-        // GET: GestionUser/Delete/5
-        public ActionResult Delete(string id)
+        // GET: Test/Delete/5
+        public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ApplicationUser applicationUser = db.ApplicationUsers.Find(id);
-            if (applicationUser == null)
+            TypeInscription typeInscription = db.TypeInscriptions.Find(id);
+            if (typeInscription == null)
             {
                 return HttpNotFound();
             }
-            return View(applicationUser);
+            return View(typeInscription);
         }
 
-        // POST: GestionUser/Delete/5
+        // POST: Test/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(string id)
+        public ActionResult DeleteConfirmed(int id)
         {
-            ApplicationUser applicationUser = db.ApplicationUsers.Find(id);
-            db.ApplicationUsers.Remove(applicationUser);
+            TypeInscription typeInscription = db.TypeInscriptions.Find(id);
+            db.TypeInscriptions.Remove(typeInscription);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

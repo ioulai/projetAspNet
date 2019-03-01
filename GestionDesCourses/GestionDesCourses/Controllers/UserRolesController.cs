@@ -11,130 +11,107 @@ using GestionDesCourses.Models;
 
 namespace GestionDesCourses.Controllers
 {
-    public class RacesController : Controller
+    public class UserRolesController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: Races
+        // GET: UserRoles
         public ActionResult Index()
         {
-            return View(db.Races.ToList());
+            return View(db.UserRoles.ToList());
         }
 
-        // GET: Races/Details/5
+        // GET: UserRoles/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Race race = db.Races.Find(id);
-            if (race == null)
+            UserRole userRole = db.UserRoles.Find(id);
+            if (userRole == null)
             {
                 return HttpNotFound();
             }
-            return View(race);
+            return View(userRole);
         }
 
-        // GET: Races/Create
+        // GET: UserRoles/Create
         public ActionResult Create()
         {
-            // cration du ViewModel nécessaire pour porter la liste des catégories et l'id de la categorie choisie en plus de la course
-            var vm = new RaceViewModel();
-            vm.Categories = db.Categories.ToList();
-            return View(vm);
+            return View();
         }
 
-        // POST: Races/Create
+        // POST: UserRoles/Create
         // Afin de déjouer les attaques par sur-validation, activez les propriétés spécifiques que vous voulez lier. Pour 
         // plus de détails, voir  http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,DateEnd,DateStart,Description,Price,Title,ZipCode")] RaceViewModel raceVM)
+        public ActionResult Create([Bind(Include = "Id,NameRole")] UserRole userRole)
         {
             if (ModelState.IsValid)
             {
-                // on vérifie qu'une catégorie ai été choisie
-                if (raceVM.IdSelectedCategory.HasValue)
-                {
-                    // on assigne la catégorie dont l'Id à été choisi pour la course
-                    raceVM.Race.Category = db.Categories.FirstOrDefault(a => a.Id == raceVM.IdSelectedCategory.Value);
-                }
-
-                // On ajoute la nouvelle course au DbSet, puis on enregistre les changements en base
-                db.Races.Add(raceVM.Race);
+                db.UserRoles.Add(userRole);
                 db.SaveChanges();
                 return RedirectToAction("Index");
-
-                
             }
-            raceVM.Categories = db.Categories.ToList();
-            return View(raceVM);
+
+            return View(userRole);
         }
 
-        // GET: Races/Edit/5
+        // GET: UserRoles/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Race race = db.Races.Find(id);
-            if (race == null)
+            UserRole userRole = db.UserRoles.Find(id);
+            if (userRole == null)
             {
                 return HttpNotFound();
             }
-            var vm = new RaceViewModel();
-            vm.Categories = db.Categories.ToList();
-            vm.Race = race;
-
-            if (race.Category != null)
-            {
-                // Si la course avait une catégorie, on affecte l'Id de cette catégorie à notre ViewModel, ansi elle sera préselectionnée dans notre liste de catégories
-                vm.IdSelectedCategory = race.Category.Id;
-            }
-            return View(vm);
-            
+            return View(userRole);
         }
 
-        // POST: Races/Edit/5
+        // POST: UserRoles/Edit/5
         // Afin de déjouer les attaques par sur-validation, activez les propriétés spécifiques que vous voulez lier. Pour 
         // plus de détails, voir  http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,DateEnd,DateStart,Description,Price,Title,ZipCode")] Race race)
+        public ActionResult Edit([Bind(Include = "Id,NameRole")] UserRole userRole)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(race).State = EntityState.Modified;
+                db.Entry(userRole).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(race);
+            return View(userRole);
         }
 
-        // GET: Races/Delete/5
+        // GET: UserRoles/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Race race = db.Races.Find(id);
-            if (race == null)
+            UserRole userRole = db.UserRoles.Find(id);
+            if (userRole == null)
             {
                 return HttpNotFound();
             }
-            return View(race);
+            return View(userRole);
         }
 
-        // POST: Races/Delete/5
+        // POST: UserRoles/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Race race = db.Races.Find(id);
-            db.Races.Remove(race);
+            UserRole userRole = db.UserRoles.Find(id);
+            db.UserRoles.Remove(userRole);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

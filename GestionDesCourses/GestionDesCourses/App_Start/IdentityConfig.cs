@@ -35,6 +35,8 @@ namespace GestionDesCourses
     // Configurer l'application que le gestionnaire des utilisateurs a utilisée dans cette application. UserManager est défini dans ASP.NET Identity et est utilisé par l'application.
     public class ApplicationUserManager : UserManager<ApplicationUser>
     {
+        
+
         public ApplicationUserManager(IUserStore<ApplicationUser> store)
             : base(store)
         {

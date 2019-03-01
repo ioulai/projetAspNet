@@ -170,24 +170,20 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ApplicationUsersController.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\DisplayConfigurationsController.cs" />
-    <Compile Include="Controllers\GestionUserController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="Controllers\RacesController.cs" />
+    <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Controllers\UniteDistancesController.cs" />
+    <Compile Include="Controllers\UserRolesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-
-    <Compile Include="Migrations\201902271445005_create.cs" />
-    <Compile Include="Migrations\201902271445005_create.Designer.cs">
-      <DependentUpon>201902271445005_create.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201902280857070_testRace.cs" />
-    <Compile Include="Migrations\201902280857070_testRace.Designer.cs">
-      <DependentUpon>201902280857070_testRace.cs</DependentUpon>
+    <Compile Include="Migrations\201903011104533_pushTableRoleUser.cs" />
+    <Compile Include="Migrations\201903011104533_pushTableRoleUser.Designer.cs">
+      <DependentUpon>201903011104533_pushTableRoleUser.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -195,6 +191,7 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\RaceViewModel.cs" />
+    <Compile Include="Models\RoleUserVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -268,19 +265,21 @@
     <Content Include="Views\UniteDistances\Details.cshtml" />
     <Content Include="Views\UniteDistances\Edit.cshtml" />
     <Content Include="Views\UniteDistances\Index.cshtml" />
-
-    <Content Include="Views\GestionUser\Create.cshtml" />
-    <Content Include="Views\GestionUser\Delete.cshtml" />
-    <Content Include="Views\GestionUser\Details.cshtml" />
-    <Content Include="Views\GestionUser\Edit.cshtml" />
-    <Content Include="Views\GestionUser\Index.cshtml" />
-
-    <Content Include="Views\Races\Create.cshtml" />
-    <Content Include="Views\Races\Delete.cshtml" />
-    <Content Include="Views\Races\Details.cshtml" />
-    <Content Include="Views\Races\Edit.cshtml" />
-    <Content Include="Views\Races\Index.cshtml" />
-
+    <Content Include="Views\test\Create.cshtml" />
+    <Content Include="Views\test\Delete.cshtml" />
+    <Content Include="Views\test\Details.cshtml" />
+    <Content Include="Views\test\Edit.cshtml" />
+    <Content Include="Views\test\Index.cshtml" />
+    <Content Include="Views\ApplicationUsers\Create.cshtml" />
+    <Content Include="Views\ApplicationUsers\Delete.cshtml" />
+    <Content Include="Views\ApplicationUsers\Details.cshtml" />
+    <Content Include="Views\ApplicationUsers\Edit.cshtml" />
+    <Content Include="Views\ApplicationUsers\Index.cshtml" />
+    <Content Include="Views\UserRoles\Create.cshtml" />
+    <Content Include="Views\UserRoles\Delete.cshtml" />
+    <Content Include="Views\UserRoles\Details.cshtml" />
+    <Content Include="Views\UserRoles\Edit.cshtml" />
+    <Content Include="Views\UserRoles\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -299,16 +298,11 @@
       <Name>BO</Name>
     </ProjectReference>
   </ItemGroup>
-
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201902271445005_create.resx">
-      <DependentUpon>201902271445005_create.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201902280857070_testRace.resx">
-      <DependentUpon>201902280857070_testRace.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201903011104533_pushTableRoleUser.resx">
+      <DependentUpon>201903011104533_pushTableRoleUser.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
-
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
