@@ -11,7 +11,7 @@ namespace GestionDesCourses.Models
     {
         public Race Race { get; set; }
 
-        public List<SelectListItem> Categories { get; set; } = new List<SelectListItem>();
+        public List<Category> Categories { get; set; } // = new List<Category>();
 
         public int? IdSelectedCategory { get; set; }
     }

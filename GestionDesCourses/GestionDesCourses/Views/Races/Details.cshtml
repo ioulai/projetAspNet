@@ -1,0 +1,86 @@
+﻿@model GestionDesCourses.Models.RaceViewModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details de la course</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Race.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Race.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Race.Category)
+        </dt>
+        <dd>
+            @if (Model.Race.Category != null)
+            {
+                @Html.DisplayFor(model => model.Race.Category.Title);
+            }
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Race.DateStart)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Race.DateStart)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Race.DateEnd)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Race.DateEnd)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Race.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Race.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Race.Price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Race.Price)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Race.ZipCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Race.ZipCode)
+        </dd>
+
+    </dl>
+</div>
+
+<div>
+    <p>Ici liste des participants??</p>
+</div>
+<p>
+    @if (User.IsInRole("Admin"))
+    {
+        @Html.ActionLink("Modifier", "Edit", new { id = Model.Race.Id }, new { @class = "btn btn-default" })
+    }
+    @Html.ActionLink("S'inscrire", "Create", "Inscriptions", new { @class = "btn btn-default" })
+    @Html.ActionLink("Btn vers page avec la liste des participants ???", "Details", new { id = Model.Race.Id }, new { @class = "btn btn-default" })
+</p>
+<p>
+    @Html.ActionLink("Retour à la liste", "Index")
+</p>
