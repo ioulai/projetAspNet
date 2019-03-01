@@ -36,7 +36,22 @@
             @Html.LabelFor(model => model.Race.DateStart, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Race.DateStart, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Race.DateStart, "", new { @class = "text-danger" })
+                
+                @* @Html.ValidationMessageFor(model => model.Race.DateStart, "", new { @class = "text-danger" }) *@
+
+                @* Gestion pour pouvoir afficher plusieurs erreurs : *@
+                @if (Html.ViewData.ModelState["Race.DateStart"] != null
+                    && Html.ViewData.ModelState["Race.DateStart"].Errors != null
+                    && Html.ViewData.ModelState["Race.DateStart"].Errors.Count() != 0)
+                {
+                    <p class="text-danger">La date de début est incorrecte</p>
+                    <ul>
+                        @foreach (var error in Html.ViewData.ModelState["Race.DateStart"].Errors)
+                    {
+                            <li class="text-danger">@error.ErrorMessage</li>
+                        }
+                    </ul>
+                }
             </div>
         </div>
 
@@ -44,7 +59,21 @@
             @Html.LabelFor(model => model.Race.DateEnd, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Race.DateEnd, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Race.DateEnd, "", new { @class = "text-danger" })
+                @*@Html.ValidationMessageFor(model => model.Race.DateEnd, "", new { @class = "text-danger" })*@
+                
+                @* Gestion pour pouvoir afficher plusieurs erreurs : *@
+                @if (Html.ViewData.ModelState["Race.DateEnd"] != null
+                    && Html.ViewData.ModelState["Race.DateEnd"].Errors != null
+                    && Html.ViewData.ModelState["Race.DateEnd"].Errors.Count() != 0)
+                {
+                    <p class="text-danger">La date de fin est incorrecte </p>
+                    <ul>
+                        @foreach (var error in Html.ViewData.ModelState["Race.DateEnd"].Errors)
+                    {
+                            <li class="text-danger">@error.ErrorMessage</li>
+                        }
+                    </ul>
+                }
             </div>
         </div>
 
@@ -86,6 +115,8 @@
     @Html.ActionLink("Retour à la liste", "Index")
 </div>
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+@* ce script semble poser problème pour les dates dans le formulaire 
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+*@
