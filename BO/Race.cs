@@ -16,10 +16,14 @@ namespace BO
 
         [Required]
         [Display(Name = "Date de fin")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime DateEnd { get; set; }
 
         [Required]
         [Display(Name = "Date de début")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime DateStart { get; set; }
 
         [Required]
