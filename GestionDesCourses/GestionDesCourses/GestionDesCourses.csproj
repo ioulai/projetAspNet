@@ -175,6 +175,7 @@
     <Compile Include="Controllers\DisplayConfigurationsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\RacesController.cs" />
     <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Controllers\UniteDistancesController.cs" />
     <Compile Include="Controllers\UserRolesController.cs" />
