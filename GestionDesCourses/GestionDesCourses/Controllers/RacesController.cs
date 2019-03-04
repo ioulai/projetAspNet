@@ -199,6 +199,7 @@ namespace GestionDesCourses.Controllers
             return View(race);
         }
 
+
         // POST: Races/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
