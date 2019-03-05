@@ -7,13 +7,13 @@ namespace GestionDesCourses.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class pushTableRoleUser : IMigrationMetadata
+    public sealed partial class updateDatabase : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(pushTableRoleUser));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(updateDatabase));
         
         string IMigrationMetadata.Id
         {
-            get { return "201903011104533_pushTableRoleUser"; }
+            get { return "201903041315276_updateDatabase"; }
         }
         
         string IMigrationMetadata.Source

@@ -49,6 +49,7 @@ namespace GestionDesCourses.Controllers
         }
 
         // GET: Races/Create
+        [Authorize]
         public ActionResult Create()
         {
             // création du ViewModel nécessaire pour porter la liste des catégories et l'id de la categorie choisie en plus de la course

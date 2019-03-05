@@ -182,9 +182,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201903011104533_pushTableRoleUser.cs" />
-    <Compile Include="Migrations\201903011104533_pushTableRoleUser.Designer.cs">
-      <DependentUpon>201903011104533_pushTableRoleUser.cs</DependentUpon>
+    <Compile Include="Migrations\201903041315276_updateDatabase.cs" />
+    <Compile Include="Migrations\201903041315276_updateDatabase.Designer.cs">
+      <DependentUpon>201903041315276_updateDatabase.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -347,8 +347,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201903011104533_pushTableRoleUser.resx">
-      <DependentUpon>201903011104533_pushTableRoleUser.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201903041315276_updateDatabase.resx">
+      <DependentUpon>201903041315276_updateDatabase.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

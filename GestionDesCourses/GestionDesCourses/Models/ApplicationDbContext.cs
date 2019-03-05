@@ -28,6 +28,8 @@ namespace GestionDesCourses.Models
 
         public System.Data.Entity.DbSet<BO.UserRole> UserRoles { get; set; }
 
+        public System.Data.Entity.DbSet<BO.Race> Races { get; set; }
+
         //public System.Data.Entity.DbSet<GestionDesCourses.Models.ApplicationUser> ApplicationUsers { get; set; }
     }
 }
