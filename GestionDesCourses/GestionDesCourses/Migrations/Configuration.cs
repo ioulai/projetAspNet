@@ -9,7 +9,7 @@ namespace GestionDesCourses.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
+            AutomaticMigrationsEnabled = true;
         }
 
         protected override void Seed(GestionDesCourses.Models.ApplicationDbContext context)

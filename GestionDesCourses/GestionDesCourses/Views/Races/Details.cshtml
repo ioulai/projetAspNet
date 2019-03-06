@@ -69,18 +69,11 @@
 
     </dl>
 </div>
-
-<div>
-    <p>Ici liste des participants??</p>
-</div>
 <p>
     @if (User.IsInRole("Admin"))
     {
         @Html.ActionLink("Modifier", "Edit", new { id = Model.Race.Id }, new { @class = "btn btn-default" })
     }
-    @Html.ActionLink("S'inscrire", "Create", "Inscriptions", new { @class = "btn btn-default" })
-    @Html.ActionLink("Btn vers page avec la liste des participants ???", "Details", new { id = Model.Race.Id }, new { @class = "btn btn-default" })
-</p>
-<p>
-    @Html.ActionLink("Retour à la liste", "Index")
+    @Html.ActionLink("S'inscrire", "Inscription", new { id = Model.Race.Id, amount = Model.Race.Price, title = Model.Race.Category.Title, end = Model.Race.DateEnd, start = Model.Race.DateStart }, new { @class = "btn btn-default" })
+    @Html.ActionLink("Annuler", "Index", "Races", new { @class = "btn btn-default" })
 </p>

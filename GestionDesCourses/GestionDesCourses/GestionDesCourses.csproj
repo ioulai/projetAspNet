@@ -15,7 +15,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>GestionDesCourses</RootNamespace>
     <AssemblyName>GestionDesCourses</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
@@ -25,6 +25,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -59,16 +60,14 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Web.Abstractions" />
     <Reference Include="System.Web.Routing" />
     <Reference Include="System.Xml" />
@@ -110,6 +109,7 @@
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
+    <Reference Include="System.Xml.Linq" />
     <Reference Include="WebGrease">
       <Private>True</Private>
       <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
@@ -164,7 +164,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Data\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -174,21 +174,32 @@
     <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\DisplayConfigurationsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\InscriptionsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\RacesController.cs" />
     <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Controllers\UniteDistancesController.cs" />
     <Compile Include="Controllers\UserRolesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201903011104533_pushTableRoleUser.cs" />
-    <Compile Include="Migrations\201903011104533_pushTableRoleUser.Designer.cs">
-      <DependentUpon>201903011104533_pushTableRoleUser.cs</DependentUpon>
+    <Compile Include="Migrations\201903041019107_Mariam1.cs" />
+    <Compile Include="Migrations\201903041019107_Mariam1.Designer.cs">
+      <DependentUpon>201903041019107_Mariam1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201903041433312_Mariam2.cs" />
+    <Compile Include="Migrations\201903041433312_Mariam2.Designer.cs">
+      <DependentUpon>201903041433312_Mariam2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201903051336129_Mariam3.cs" />
+    <Compile Include="Migrations\201903051336129_Mariam3.Designer.cs">
+      <DependentUpon>201903051336129_Mariam3.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\InscriptionViewModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\RaceViewModel.cs" />
     <Compile Include="Models\RoleUserVM.cs" />
@@ -328,10 +339,18 @@
     <Content Include="Views\UserRoles\Details.cshtml" />
     <Content Include="Views\UserRoles\Edit.cshtml" />
     <Content Include="Views\UserRoles\Index.cshtml" />
+    <Content Include="Views\Races\Create.cshtml" />
+    <Content Include="Views\Races\Delete.cshtml" />
+    <Content Include="Views\Races\Details.cshtml" />
+    <Content Include="Views\Races\Edit.cshtml" />
+    <Content Include="Views\Races\Index.cshtml" />
+    <Content Include="Views\Inscriptions\Create.cshtml" />
+    <Content Include="Views\Inscriptions\Delete.cshtml" />
+    <Content Include="Views\Inscriptions\Details.cshtml" />
+    <Content Include="Views\Inscriptions\Edit.cshtml" />
+    <Content Include="Views\Races\Liste_Inscription.cshtml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
@@ -346,8 +365,14 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201903011104533_pushTableRoleUser.resx">
-      <DependentUpon>201903011104533_pushTableRoleUser.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201903041019107_Mariam1.resx">
+      <DependentUpon>201903041019107_Mariam1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903041433312_Mariam2.resx">
+      <DependentUpon>201903041433312_Mariam2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903051336129_Mariam3.resx">
+      <DependentUpon>201903051336129_Mariam3.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
