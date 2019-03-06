@@ -183,7 +183,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-<<<<<<< HEAD
     <Compile Include="Migrations\201903041019107_Mariam1.cs" />
     <Compile Include="Migrations\201903041019107_Mariam1.Designer.cs">
       <DependentUpon>201903041019107_Mariam1.cs</DependentUpon>
@@ -195,11 +194,9 @@
     <Compile Include="Migrations\201903051336129_Mariam3.cs" />
     <Compile Include="Migrations\201903051336129_Mariam3.Designer.cs">
       <DependentUpon>201903051336129_Mariam3.cs</DependentUpon>
-=======
     <Compile Include="Migrations\201903041315276_updateDatabase.cs" />
     <Compile Include="Migrations\201903041315276_updateDatabase.Designer.cs">
       <DependentUpon>201903041315276_updateDatabase.cs</DependentUpon>
->>>>>>> 5baae3940ea1f1e2d00f3d843683c799573f6f35
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
