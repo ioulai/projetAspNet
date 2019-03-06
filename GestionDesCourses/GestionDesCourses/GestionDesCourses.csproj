@@ -183,6 +183,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+<<<<<<< HEAD
     <Compile Include="Migrations\201903041019107_Mariam1.cs" />
     <Compile Include="Migrations\201903041019107_Mariam1.Designer.cs">
       <DependentUpon>201903041019107_Mariam1.cs</DependentUpon>
@@ -194,6 +195,11 @@
     <Compile Include="Migrations\201903051336129_Mariam3.cs" />
     <Compile Include="Migrations\201903051336129_Mariam3.Designer.cs">
       <DependentUpon>201903051336129_Mariam3.cs</DependentUpon>
+=======
+    <Compile Include="Migrations\201903041315276_updateDatabase.cs" />
+    <Compile Include="Migrations\201903041315276_updateDatabase.Designer.cs">
+      <DependentUpon>201903041315276_updateDatabase.cs</DependentUpon>
+>>>>>>> 5baae3940ea1f1e2d00f3d843683c799573f6f35
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -344,11 +350,14 @@
     <Content Include="Views\Races\Details.cshtml" />
     <Content Include="Views\Races\Edit.cshtml" />
     <Content Include="Views\Races\Index.cshtml" />
+<<<<<<< HEAD
     <Content Include="Views\Inscriptions\Create.cshtml" />
     <Content Include="Views\Inscriptions\Delete.cshtml" />
     <Content Include="Views\Inscriptions\Details.cshtml" />
     <Content Include="Views\Inscriptions\Edit.cshtml" />
     <Content Include="Views\Races\Liste_Inscription.cshtml" />
+=======
+>>>>>>> 5baae3940ea1f1e2d00f3d843683c799573f6f35
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
@@ -365,6 +374,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+<<<<<<< HEAD
     <EmbeddedResource Include="Migrations\201903041019107_Mariam1.resx">
       <DependentUpon>201903041019107_Mariam1.cs</DependentUpon>
     </EmbeddedResource>
@@ -373,6 +383,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201903051336129_Mariam3.resx">
       <DependentUpon>201903051336129_Mariam3.cs</DependentUpon>
+=======
+    <EmbeddedResource Include="Migrations\201903041315276_updateDatabase.resx">
+      <DependentUpon>201903041315276_updateDatabase.cs</DependentUpon>
+>>>>>>> 5baae3940ea1f1e2d00f3d843683c799573f6f35
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

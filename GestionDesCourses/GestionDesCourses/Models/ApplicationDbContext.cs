@@ -30,7 +30,11 @@ namespace GestionDesCourses.Models
 
         public System.Data.Entity.DbSet<BO.Race> Races { get; set; }
 
+<<<<<<< HEAD
         public System.Data.Entity.DbSet<BO.Inscription> Inscriptions { get; set; }
         
+=======
+        //public System.Data.Entity.DbSet<GestionDesCourses.Models.ApplicationUser> ApplicationUsers { get; set; }
+>>>>>>> 5baae3940ea1f1e2d00f3d843683c799573f6f35
     }
 }

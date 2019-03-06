@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using BO;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace GestionDesCourses.Models
@@ -94,6 +95,8 @@ namespace GestionDesCourses.Models
         [StringLength(10)]
         [Display(Name = "N de telephone")]
         public string Phone { get; set; }
+
+        public UserRole role;
     }
 
     public class ResetPasswordViewModel
