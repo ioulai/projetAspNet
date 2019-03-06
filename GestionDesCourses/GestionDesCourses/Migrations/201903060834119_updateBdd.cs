@@ -3,7 +3,7 @@ namespace GestionDesCourses.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class updateDatabase : DbMigration
+    public partial class updateBdd : DbMigration
     {
         public override void Up()
         {
@@ -28,6 +28,23 @@ namespace GestionDesCourses.Migrations
                 .PrimaryKey(t => t.Id);
             
             CreateTable(
+                "dbo.Inscriptions",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        Amount = c.Single(nullable: false),
+                        IdentityModelId = c.String(),
+                        RaceId = c.Int(nullable: false),
+                        RaceTitle = c.String(),
+                        RaceStart = c.DateTime(nullable: false),
+                        RaceEnd = c.DateTime(nullable: false),
+                        TypeInscriptionId = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.Races", t => t.RaceId, cascadeDelete: true)
+                .Index(t => t.RaceId);
+            
+            CreateTable(
                 "dbo.Races",
                 c => new
                     {
@@ -43,20 +60,6 @@ namespace GestionDesCourses.Migrations
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Categories", t => t.Category_Id)
                 .Index(t => t.Category_Id);
-            
-            CreateTable(
-                "dbo.Inscriptions",
-                c => new
-                    {
-                        Id = c.Int(nullable: false, identity: true),
-                        Amount = c.Single(nullable: false),
-                        IdentityModelId = c.Int(nullable: false),
-                        RaceId = c.Int(nullable: false),
-                        TypeInscriptionId = c.Int(nullable: false),
-                    })
-                .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Races", t => t.RaceId, cascadeDelete: true)
-                .Index(t => t.RaceId);
             
             CreateTable(
                 "dbo.Pois",
@@ -190,8 +193,8 @@ namespace GestionDesCourses.Migrations
             DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
             DropIndex("dbo.AspNetRoles", "RoleNameIndex");
             DropIndex("dbo.Pois", new[] { "Race_Id" });
-            DropIndex("dbo.Inscriptions", new[] { "RaceId" });
             DropIndex("dbo.Races", new[] { "Category_Id" });
+            DropIndex("dbo.Inscriptions", new[] { "RaceId" });
             DropTable("dbo.AspNetUserLogins");
             DropTable("dbo.AspNetUserClaims");
             DropTable("dbo.AspNetUsers");
@@ -201,8 +204,8 @@ namespace GestionDesCourses.Migrations
             DropTable("dbo.AspNetUserRoles");
             DropTable("dbo.AspNetRoles");
             DropTable("dbo.Pois");
-            DropTable("dbo.Inscriptions");
             DropTable("dbo.Races");
+            DropTable("dbo.Inscriptions");
             DropTable("dbo.DisplayConfigurations");
             DropTable("dbo.Categories");
         }

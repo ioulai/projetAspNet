@@ -183,20 +183,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201903041019107_Mariam1.cs" />
-    <Compile Include="Migrations\201903041019107_Mariam1.Designer.cs">
-      <DependentUpon>201903041019107_Mariam1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201903041433312_Mariam2.cs" />
-    <Compile Include="Migrations\201903041433312_Mariam2.Designer.cs">
-      <DependentUpon>201903041433312_Mariam2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201903051336129_Mariam3.cs" />
-    <Compile Include="Migrations\201903051336129_Mariam3.Designer.cs">
-      <DependentUpon>201903051336129_Mariam3.cs</DependentUpon>
-    <Compile Include="Migrations\201903041315276_updateDatabase.cs" />
-    <Compile Include="Migrations\201903041315276_updateDatabase.Designer.cs">
-      <DependentUpon>201903041315276_updateDatabase.cs</DependentUpon>
+    <Compile Include="Migrations\201903060834119_updateBdd.cs" />
+    <Compile Include="Migrations\201903060834119_updateBdd.Designer.cs">
+      <DependentUpon>201903060834119_updateBdd.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -347,16 +336,17 @@
     <Content Include="Views\Races\Details.cshtml" />
     <Content Include="Views\Races\Edit.cshtml" />
     <Content Include="Views\Races\Index.cshtml" />
-<<<<<<< HEAD
     <Content Include="Views\Inscriptions\Create.cshtml" />
     <Content Include="Views\Inscriptions\Delete.cshtml" />
     <Content Include="Views\Inscriptions\Details.cshtml" />
     <Content Include="Views\Inscriptions\Edit.cshtml" />
     <Content Include="Views\Races\Liste_Inscription.cshtml" />
-=======
->>>>>>> 5baae3940ea1f1e2d00f3d843683c799573f6f35
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201903060834119_updateBdd.resx">
+      <DependentUpon>201903060834119_updateBdd.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
@@ -369,22 +359,6 @@
       <Project>{1868ce0b-58d3-47e7-98af-48e6aedf74f9}</Project>
       <Name>BO</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-<<<<<<< HEAD
-    <EmbeddedResource Include="Migrations\201903041019107_Mariam1.resx">
-      <DependentUpon>201903041019107_Mariam1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201903041433312_Mariam2.resx">
-      <DependentUpon>201903041433312_Mariam2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201903051336129_Mariam3.resx">
-      <DependentUpon>201903051336129_Mariam3.cs</DependentUpon>
-=======
-    <EmbeddedResource Include="Migrations\201903041315276_updateDatabase.resx">
-      <DependentUpon>201903041315276_updateDatabase.cs</DependentUpon>
->>>>>>> 5baae3940ea1f1e2d00f3d843683c799573f6f35
-    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

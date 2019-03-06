@@ -7,13 +7,13 @@ namespace GestionDesCourses.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class updateDatabase : IMigrationMetadata
+    public sealed partial class updateBdd : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(updateDatabase));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(updateBdd));
         
         string IMigrationMetadata.Id
         {
-            get { return "201903041315276_updateDatabase"; }
+            get { return "201903060834119_updateBdd"; }
         }
         
         string IMigrationMetadata.Source
