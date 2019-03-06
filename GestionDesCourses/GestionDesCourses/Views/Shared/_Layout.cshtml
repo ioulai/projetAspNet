@@ -18,11 +18,9 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-<<<<<<< HEAD
+
                 @Html.ActionLink("Le Sport commence ici", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-=======
-                @Html.ActionLink("Gestion Courses", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
->>>>>>> 5baae3940ea1f1e2d00f3d843683c799573f6f35
+
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
@@ -39,6 +37,7 @@
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                 }
                 </ul>
+                @Html.Partial("_LoginPartial")
             </div>
         </div>
     </div>
@@ -46,11 +45,9 @@
         @RenderBody()
         <hr />
         <footer>
-<<<<<<< HEAD
-            <p>&copy; @DateTime.Now.Year - Morgan - Matthieu - Isaac - Mariam</p>
-=======
-            <p>&copy; @DateTime.Now.Year - Gestion Course</p>
->>>>>>> 5baae3940ea1f1e2d00f3d843683c799573f6f35
+
+            <p>&copy; @DateTime.Now.Year - Morgane - Matthieu - Isaac - Mariam</p>
+
         </footer>
     </div>
 
