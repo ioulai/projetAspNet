@@ -21,10 +21,10 @@ namespace BO
 
         public int RaceId { get; set; } // l'id de la course  laquelle la personne s'inscrit
 
-        public string RaceTitle { get; set; }
-        public DateTime RaceStart { get; set; }
-        public DateTime RaceEnd { get; set; }
-        
+        public string RaceTitle { get; set; } // à supprimer car on retrouve cette info avec l'id de la course (RaceId)
+        public DateTime RaceStart { get; set; } // à supprimer car on retrouve cette info avec l'id de la course (RaceId)
+        public DateTime RaceEnd { get; set; } // à supprimer car on retrouve cette info avec l'id de la course (RaceId)
+
         public int TypeInscriptionId { get; set; } // // l'id correspondant au type d'inscription (la personne s'inscrit en tant que compétiteur ou organisateur)
         
     }

@@ -18,24 +18,17 @@ namespace GestionDesCourses.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         private static List<Inscription> lesInscriptions;
-        private static List<Race> lesRaces;
         private static List<Category> lesCategoriesDispo;
 
         private Inscription uneInscription = new Inscription();
 
         public RacesController()
         {
-            if (lesCategoriesDispo == null)
-            {
-                lesCategoriesDispo = db.Categories.ToList();
-            }  
+            lesCategoriesDispo = db.Categories.ToList();
+              
             if(lesInscriptions == null)
             {
                 lesInscriptions = db.Inscriptions.ToList();
-            }
-            if (lesRaces == null)
-            {
-                lesRaces = db.Races.ToList();
             }
 
         }
@@ -242,7 +235,7 @@ namespace GestionDesCourses.Controllers
             // idem pour la taille des chaines de caractère
 
             // le titre doit etre unique
-            List<Race> coursesExistantes = db.Races.ToList();
+            List<Race> coursesExistantes = db.Races.Include(z => z.Category).ToList();
             if (coursesExistantes.Any(p => p.Title.ToUpper() == raceVm.Race.Title.ToUpper() && p.Id != raceVm.Race.Id))
             {
                 ModelState.AddModelError("Race.Title", "Il existe déjà une course portant ce titre");
@@ -282,29 +275,55 @@ namespace GestionDesCourses.Controllers
             return brokenRules == 0;
         }
 
-      
-        public ActionResult Inscription(int id, float amount, string title, DateTime start, DateTime end)
+        public ActionResult Inscription(int id)
         {
+
             if (ModelState.IsValid)
             {
-                uneInscription.IdentityModelId = User.Identity.GetUserId();
-                uneInscription.RaceId = id;
-                uneInscription.Amount = amount;
-                uneInscription.TypeInscriptionId = 1;
-                uneInscription.RaceEnd = end;
-                uneInscription.RaceStart = start;
-                uneInscription.RaceTitle = title;
-                db.Inscriptions.Add(uneInscription);
-                db.SaveChanges();
-                return RedirectToAction("Liste_Inscription");
+
+                try
+                {
+                    // vérifier que la personne ne soit pas déjà inscrite à cette course
+                    if (!CheckRulesInscription(id, User.Identity.GetUserId()))
+                    {
+                        throw new Exception("Une ou plusieurs rêgles métiers ne sont pas respectées sur une inscription");
+                    }
+
+                    // sinon c'est bon on enregistre l'inscription pour la course
+
+                    // on récupère la course en question
+                    var racedb = db.Races.Include(z => z.Category).FirstOrDefault(i => i.Id == id);
+
+                    uneInscription.IdentityModelId = User.Identity.GetUserId();
+                    uneInscription.RaceId = id;
+                    uneInscription.Amount = racedb.Price; // à supprimer !! avec l'id de la course, pas besoin de mettre cette colonne dans la table Inscriptions
+                    uneInscription.TypeInscriptionId = 1; // à gérer !!
+                    uneInscription.RaceEnd = racedb.DateEnd; // à supprimer !! avec l'id de la course, pas besoin de mettre cette colonne dans la table Inscriptions
+                    uneInscription.RaceStart = racedb.DateStart; // à supprimer !! avec l'id de la course, pas besoin de mettre cette colonne dans la table Inscriptions
+                    uneInscription.RaceTitle = racedb.Title; // à supprimer !! avec l'id de la course, pas besoin de mettre cette colonne dans la table Inscriptions
+                    db.Inscriptions.Add(uneInscription);
+                    db.SaveChanges();
+                    return RedirectToAction("Liste_Inscription");
+                }
+                catch (Exception ex)
+                {
+                    // si on a rencontré une erreur, on affiche un message d'alerte
+                    Debug.WriteLine(ex.Message);
+                    TempData["alertMessage"] = ViewData.ModelState["ErreurInscriptionCourse"].Errors[0].ErrorMessage;
+                    return RedirectToAction("Index");
+                }
             }
 
-            return View();
+            return RedirectToAction("Index");
         }
 
         public ActionResult Liste_Inscription()
         {
             var u = User.Identity.GetUserId();
+
+            // recharger la liste des inscriptions au cas ou !!
+            lesInscriptions = db.Inscriptions.ToList();
+
             return View(lesInscriptions.Where(id => id.IdentityModelId == u).ToList());
 
         }
@@ -317,6 +336,22 @@ namespace GestionDesCourses.Controllers
 
             return RedirectToAction("Index");
 
+        }
+
+        private bool CheckRulesInscription(int idCourse, string idParticipant)
+        {
+            var brokenRules = 0;
+
+            lesInscriptions = db.Inscriptions.ToList();
+
+            // vérifier que la personne ne soit pas déjà inscrite à cette course
+            if (lesInscriptions.Any(i => i.RaceId == idCourse && i.IdentityModelId == idParticipant))
+            {
+                ModelState.AddModelError("ErreurInscriptionCourse", "Vous etes déjà inscrit à cette course");
+                brokenRules++;
+            }
+             
+            return brokenRules == 0;
         }
     }
 }
