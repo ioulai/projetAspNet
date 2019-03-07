@@ -18,15 +18,16 @@ namespace GestionDesCourses.Models
             return userIdentity;
         }
 
-        public string FirstName { get; set; }
+        public string Prenom { get; set; }
 
-        public string LastName { get; set; }
+        public string Nom { get; set; }
 
-        public string Phone { get; set; }
+        public string Telephone { get; set; }
         public DateTime? BirthDate { get; set; }
         public string RoleUser { get; set; }
         public string RoleAdministrateur { get; set; }
         public string RoleSuperAdministrateur { get; set; }
+        public string MotDePasse { get; set; }
     }
       
 }
