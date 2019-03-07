@@ -9,6 +9,7 @@ using System.Web;
 using System.Web.Mvc;
 using BO;
 using GestionDesCourses.Models;
+using Microsoft.AspNet.Identity;
 
 namespace GestionDesCourses.Controllers
 {
@@ -17,13 +18,24 @@ namespace GestionDesCourses.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         private static List<Category> lesCategoriesDispo;
+        private static List<Inscription> lesInscriptions;
+        private static List<Race> lesRaces;
+        private Inscription uneInscription = new Inscription();
 
         public RacesController()
         {
             if(lesCategoriesDispo == null)
             {
                 lesCategoriesDispo = db.Categories.ToList();
-            }          
+            }
+            if (lesInscriptions == null)
+            {
+                lesInscriptions = db.Inscriptions.ToList();
+            }
+            if (lesRaces == null)
+            {
+                lesRaces = db.Races.ToList();
+            }
         }
 
         // GET: Races
@@ -282,5 +294,46 @@ namespace GestionDesCourses.Controllers
 
             return brokenRules == 0;
         }
+
+        public ActionResult Inscription(int id, float amount, string title, DateTime start, DateTime end)
+        {
+            if (ModelState.IsValid)
+            {
+                uneInscription.IdentityModelId = User.Identity.GetUserId();
+                uneInscription.RaceId = id;
+                uneInscription.Amount = amount;
+                uneInscription.TypeInscriptionId = 1;
+                uneInscription.RaceEnd = end;
+                uneInscription.RaceStart = start;
+                uneInscription.RaceTitle = title;
+                db.Inscriptions.Add(uneInscription);
+                db.SaveChanges();
+                return RedirectToAction("Liste_Inscription");
+            }
+
+            return View();
+        }
+
+        public ActionResult Liste_Inscription()
+        {
+            var u = User.Identity.GetUserId();
+            return View(lesInscriptions.Where(id => id.IdentityModelId == u).ToList());
+
+        }
+
+        public ActionResult Desinscription(int id)
+        {
+            Inscription inscription = db.Inscriptions.Find(id);
+            db.Inscriptions.Remove(inscription);
+            db.SaveChanges();
+
+            return RedirectToAction("Index");
+
+        }
     }
+
 }
+
+
+
+
