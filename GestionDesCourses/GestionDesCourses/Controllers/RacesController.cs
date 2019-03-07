@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -9,7 +9,6 @@ using System.Web;
 using System.Web.Mvc;
 using BO;
 using GestionDesCourses.Models;
-using Microsoft.AspNet.Identity;
 
 namespace GestionDesCourses.Controllers
 {
@@ -17,32 +16,20 @@ namespace GestionDesCourses.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        private static List<Inscription> lesInscriptions;
-        private static List<Race> lesRaces;
         private static List<Category> lesCategoriesDispo;
-
-        private Inscription uneInscription = new Inscription();
 
         public RacesController()
         {
-            if (lesCategoriesDispo == null)
+            if(lesCategoriesDispo == null)
             {
                 lesCategoriesDispo = db.Categories.ToList();
-            }  
-            if(lesInscriptions == null)
-            {
-                lesInscriptions = db.Inscriptions.ToList();
-            }
-            if (lesRaces == null)
-            {
-                lesRaces = db.Races.ToList();
-            }
-
+            }          
         }
 
         // GET: Races
         public ActionResult Index()
         {
+
             return View(db.Races.Include(c => c.Category));
         }
 
@@ -56,18 +43,20 @@ namespace GestionDesCourses.Controllers
             }
 
             RaceViewModel raceVM = new RaceViewModel();
-            raceVM.Race = db.Races.Include(c => c.Category).SingleOrDefault(c => c.Id == id);
+            raceVM.Race = db.Races.Include("Category").Include("Pois").SingleOrDefault(c => c.Id == id);
+            
 
             return View(raceVM);
         }
 
         // GET: Races/Create
+        [Authorize]
         public ActionResult Create()
         {
             // création du ViewModel nécessaire pour porter la liste des catégories et l'id de la categorie choisie en plus de la course
             var raceVM = new RaceViewModel();
-
             raceVM.Categories = lesCategoriesDispo;
+            raceVM.lesPoisVM = db.Pois.ToList();
 
             return View(raceVM);
         }
@@ -91,14 +80,25 @@ namespace GestionDesCourses.Controllers
                     }
 
                     // on vérifie qu'une catégorie ai été choisie
-                    if (raceVM.IdSelectedCategory.HasValue)
+                    if (raceVM.IdSelectedCategory.HasValue && raceVM.IdPoisSelected.HasValue)
                     {
                         // on assigne la catégorie dont l'Id à été choisi pour la course
                         raceVM.Race.Category = db.Categories.FirstOrDefault(a => a.Id == raceVM.IdSelectedCategory.Value);
+
+                        //on assigne à la POI l'ID de la course
+                        var lePoi = db.Pois.Find(raceVM.IdPoisSelected);
+                        if(raceVM.Race.Pois == null)
+                        {
+                            raceVM.Race.Pois = new List<Poi>();
+                            
+                        }
+                        raceVM.Race.Pois.Add(lePoi);
+
                     }
 
                     // On ajoute la nouvelle course au DbSet, puis on enregistre les changements en base
                     db.Races.Add(raceVM.Race);
+                    
                     db.SaveChanges();
                     return RedirectToAction("Index");
                 
@@ -109,10 +109,12 @@ namespace GestionDesCourses.Controllers
                     Debug.WriteLine(ex.Message);
                     // Si nous avons rencontré une erreur, il faut recharger la page de création, de ce fait il nous faut ré-alimenter le Viewmodel avant de le passer à la vue
                     raceVM.Categories = lesCategoriesDispo;
+                    raceVM.lesPoisVM = db.Pois.ToList();
                     return View(raceVM);
                 }
             }
             raceVM.Categories = lesCategoriesDispo;
+            raceVM.lesPoisVM = db.Pois.ToList();
             return View(raceVM);  
         }
 
@@ -130,7 +132,6 @@ namespace GestionDesCourses.Controllers
                 return HttpNotFound();
             }
             var raceVM = new RaceViewModel();
-
             raceVM.Categories = lesCategoriesDispo;
             raceVM.Race = race;
 
@@ -280,43 +281,6 @@ namespace GestionDesCourses.Controllers
             */
 
             return brokenRules == 0;
-        }
-
-      
-        public ActionResult Inscription(int id, float amount, string title, DateTime start, DateTime end)
-        {
-            if (ModelState.IsValid)
-            {
-                uneInscription.IdentityModelId = User.Identity.GetUserId();
-                uneInscription.RaceId = id;
-                uneInscription.Amount = amount;
-                uneInscription.TypeInscriptionId = 1;
-                uneInscription.RaceEnd = end;
-                uneInscription.RaceStart = start;
-                uneInscription.RaceTitle = title;
-                db.Inscriptions.Add(uneInscription);
-                db.SaveChanges();
-                return RedirectToAction("Liste_Inscription");
-            }
-
-            return View();
-        }
-
-        public ActionResult Liste_Inscription()
-        {
-            var u = User.Identity.GetUserId();
-            return View(lesInscriptions.Where(id => id.IdentityModelId == u).ToList());
-
-        }
-        
-        public ActionResult Desinscription(int id)
-        {
-            Inscription inscription = db.Inscriptions.Find(id);
-            db.Inscriptions.Remove(inscription);
-            db.SaveChanges();
-
-            return RedirectToAction("Index");
-
         }
     }
 }

@@ -2,11 +2,12 @@
 
 @{
     ViewBag.Title = "Details";
+
 }
 
 <h2>Details de la course</h2>
 
-<div>
+<div class="row">
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -69,20 +70,35 @@
 
     </dl>
 </div>
+
+<div>
+    <p>Ici liste des participants??</p>
+</div>
+
+<div class="row">
+    <div id="lamap"></div>
+</div>
 <p>
     @if (User.IsInRole("Admin"))
     {
         @Html.ActionLink("Modifier", "Edit", new { id = Model.Race.Id }, new { @class = "btn btn-default" })
     }
-<<<<<<< HEAD
     @Html.ActionLink("S'inscrire", "Inscription", new { id = Model.Race.Id, amount = Model.Race.Price, title = Model.Race.Category.Title, end = Model.Race.DateEnd, start = Model.Race.DateStart }, new { @class = "btn btn-default" })
     @Html.ActionLink("Annuler", "Index", "Races", new { @class = "btn btn-default" })
-</p>
-=======
-    @Html.ActionLink("S'inscrire", "Create", "Inscriptions", new { @class = "btn btn-default" })
-    @Html.ActionLink("Btn vers page avec la liste des participants ???", "Details", new { id = Model.Race.Id }, new { @class = "btn btn-default" })
 </p>
 <p>
     @Html.ActionLink("Retour à la liste", "Index")
 </p>
->>>>>>> 5baae3940ea1f1e2d00f3d843683c799573f6f35
+
+<script>
+    window.onload = (function () {
+  
+        @{foreach (var p in Model.Race.Pois) {
+             <Text> recupInfoMapByGpx('@p.Description');</Text>
+         } }
+    });
+   
+
+       
+
+</script>

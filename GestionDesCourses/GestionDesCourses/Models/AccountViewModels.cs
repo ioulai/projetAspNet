@@ -1,5 +1,4 @@
-﻿using BO;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace GestionDesCourses.Models
@@ -49,10 +48,17 @@ namespace GestionDesCourses.Models
 
     public class LoginViewModel
     {
+        /*
         [Required]
         [Display(Name = "Courrier électronique")]
         [EmailAddress]
         public string Email { get; set; }
+        */
+
+        [Required]
+        [Display(Name = "identifiant")]
+
+        public string UserName { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
@@ -90,13 +96,15 @@ namespace GestionDesCourses.Models
         [StringLength(50)]
         [Display(Name = "Nom")]
         public string LastName { get; set; }
+        [Required]
+        [StringLength(50)]
+        [Display(Name = "Nom Utilisateur")]
+        public string UserName { get; set; }
 
         [Required]
         [StringLength(10)]
         [Display(Name = "N de telephone")]
         public string Phone { get; set; }
-
-        public UserRole role;
     }
 
     public class ResetPasswordViewModel

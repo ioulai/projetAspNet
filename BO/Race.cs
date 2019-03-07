@@ -32,7 +32,7 @@ namespace BO
 
         public List<Inscription> Inscriptions { get; set; }
 
-        public List<Poi> Pois { get; set; }
+        public virtual ICollection<Poi> Pois { get; set; }
 
         [Required]
         [Display(Name = "Prix")]

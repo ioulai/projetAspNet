@@ -15,6 +15,10 @@ namespace GestionDesCourses.Models
 
         public List<Inscription> Inscriptions { get; set; }
 
+        public List<Poi> lesPoisVM { get; set; }
+
+        public int? IdPoisSelected { get; set; }
+
         public int? IdSelectedCategory { get; set; }
 
     }
