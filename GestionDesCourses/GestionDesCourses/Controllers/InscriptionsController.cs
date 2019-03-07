@@ -11,6 +11,7 @@ using GestionDesCourses.Models;
 
 namespace GestionDesCourses.Controllers
 {
+    [Authorize(Roles ="User")]
     public class InscriptionsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();

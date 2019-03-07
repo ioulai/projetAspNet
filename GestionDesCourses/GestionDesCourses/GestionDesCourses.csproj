@@ -46,11 +46,13 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -184,25 +186,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201903060834119_updateBdd.cs" />
-    <Compile Include="Migrations\201903060834119_updateBdd.Designer.cs">
-      <DependentUpon>201903060834119_updateBdd.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201903060947145_update_race-poi.cs" />
-    <Compile Include="Migrations\201903060947145_update_race-poi.Designer.cs">
-      <DependentUpon>201903060947145_update_race-poi.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201903061100010_update_race-poi-manyToMany.cs" />
-    <Compile Include="Migrations\201903061100010_update_race-poi-manyToMany.Designer.cs">
-      <DependentUpon>201903061100010_update_race-poi-manyToMany.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201903061548242_update_race-category-oneToMany.cs" />
-    <Compile Include="Migrations\201903061548242_update_race-category-oneToMany.Designer.cs">
-      <DependentUpon>201903061548242_update_race-category-oneToMany.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201903070817547_update_Test.cs" />
-    <Compile Include="Migrations\201903070817547_update_Test.Designer.cs">
-      <DependentUpon>201903070817547_update_Test.cs</DependentUpon>
+    <Compile Include="Migrations\201903071123429_test-beta3.cs" />
+    <Compile Include="Migrations\201903071123429_test-beta3.Designer.cs">
+      <DependentUpon>201903071123429_test-beta3.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -439,9 +425,6 @@
     <Content Include="Views\Races\Liste_Inscription.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201903060834119_updateBdd.resx">
-      <DependentUpon>201903060834119_updateBdd.cs</DependentUpon>
-    </EmbeddedResource>
     <Content Include="Views\Pois\Create.cshtml" />
     <Content Include="Views\Pois\Delete.cshtml" />
     <Content Include="Views\Pois\Details.cshtml" />
@@ -456,7 +439,9 @@
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="packages.config" />
+    <Content Include="packages.config">
+      <SubType>Designer</SubType>
+    </Content>
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
@@ -466,19 +451,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201903060947145_update_race-poi.resx">
-      <DependentUpon>201903060947145_update_race-poi.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201903071123429_test-beta3.resx">
+      <DependentUpon>201903071123429_test-beta3.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201903061100010_update_race-poi-manyToMany.resx">
-      <DependentUpon>201903061100010_update_race-poi-manyToMany.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201903061548242_update_race-category-oneToMany.resx">
-      <DependentUpon>201903061548242_update_race-category-oneToMany.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201903070817547_update_Test.resx">
-      <DependentUpon>201903070817547_update_Test.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="obj\Debug\GestionDesCourses.Migrations.update_racepoi.resources" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

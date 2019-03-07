@@ -13,6 +13,7 @@ using Microsoft.AspNet.Identity;
 
 namespace GestionDesCourses.Controllers
 {
+    [Authorize]
     public class RacesController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -62,7 +63,7 @@ namespace GestionDesCourses.Controllers
         }
 
         // GET: Races/Create
-        [Authorize]
+        [Authorize(Roles = "Admin,SA")]
         public ActionResult Create()
         {
             // création du ViewModel nécessaire pour porter la liste des catégories et l'id de la categorie choisie en plus de la course
@@ -78,6 +79,7 @@ namespace GestionDesCourses.Controllers
         // plus de détails, voir  http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin,SA")]
         public ActionResult Create(RaceViewModel raceVM)
         {
             
@@ -131,6 +133,7 @@ namespace GestionDesCourses.Controllers
         }
 
         // GET: Races/Edit/5
+        [Authorize(Roles = "Admin")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -161,6 +164,7 @@ namespace GestionDesCourses.Controllers
         // plus de détails, voir  http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin,SA")]
         public ActionResult Edit(RaceViewModel raceVM)
         {
         /*    if (ModelState.IsValid)
@@ -213,6 +217,7 @@ namespace GestionDesCourses.Controllers
         }
 
         // GET: Races/Delete/5
+        [Authorize(Roles = "Admin,SA")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -229,6 +234,7 @@ namespace GestionDesCourses.Controllers
 
 
         // POST: Races/Delete/5
+        [Authorize(Roles = "Admin,SA")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
@@ -295,6 +301,7 @@ namespace GestionDesCourses.Controllers
             return brokenRules == 0;
         }
 
+        [Authorize(Roles = "User")]
         public ActionResult Inscription(int id, float amount, string title, DateTime start, DateTime end)
         {
 
@@ -336,7 +343,7 @@ namespace GestionDesCourses.Controllers
 
             return RedirectToAction("Index");
         }
-
+        [Authorize(Roles = "User")]
         public ActionResult Liste_Inscription()
         {
             var u = User.Identity.GetUserId();
@@ -347,7 +354,7 @@ namespace GestionDesCourses.Controllers
             return View(lesInscriptions.Where(id => id.IdentityModelId == u).ToList());
 
         }
-
+        [Authorize(Roles = "User")]
         public ActionResult Desinscription(int id)
         {
             Inscription inscription = db.Inscriptions.Find(id);

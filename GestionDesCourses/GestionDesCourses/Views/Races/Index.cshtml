@@ -95,10 +95,10 @@
             {
                  @Html.ActionLink("Supprimer", "Delete", new { id = item.Id }, new { @class = "btn btn-default" }) 
             }
-            @*@Html.ActionLink("S'inscrire", "Inscription", new { id = item.Id , amount = item.Price, title = item.Category.Title, end = item.DateEnd, start = item.DateStart }, new { @class = "btn btn-default" })*@
+            @Html.ActionLink("S'inscrire", "Inscription", new { id = item.Id , amount = item.Price, title = item.Category.Title, end = item.DateEnd, start = item.DateStart }, new { @class = "btn btn-default" })
 
-            @* on envoie que l'id de la course seul, c'est suffisant*@
-            @Html.ActionLink("S'inscrire", "Inscription", new { id = item.Id }, new { @class = "btn btn-default" })
+            @* on envoie que l'id de la course seul, c'est suffisant
+            @Html.ActionLink("S'inscrire", "Inscription", new { id = item.Id }, new { @class = "btn btn-default" })*@
 
         </td>
     </tr>

@@ -3,7 +3,7 @@ namespace GestionDesCourses.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class updateBdd : DbMigration
+    public partial class testbeta3 : DbMigration
     {
         public override void Up()
         {
@@ -17,15 +17,24 @@ namespace GestionDesCourses.Migrations
                 .PrimaryKey(t => t.Id);
             
             CreateTable(
-                "dbo.DisplayConfigurations",
+                "dbo.Races",
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        DeviceName = c.String(),
-                        SpeedAvg = c.Boolean(nullable: false),
-                        SpeedMax = c.Boolean(nullable: false),
+                        DateEnd = c.DateTime(nullable: false),
+                        DateStart = c.DateTime(nullable: false),
+                        Description = c.String(nullable: false, maxLength: 200),
+                        Price = c.Single(nullable: false),
+                        Title = c.String(nullable: false, maxLength: 25),
+                        ZipCode = c.String(nullable: false),
+                        Category_Id = c.Int(nullable: false),
+                        Poi_Id = c.Int(),
                     })
-                .PrimaryKey(t => t.Id);
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.Categories", t => t.Category_Id, cascadeDelete: true)
+                .ForeignKey("dbo.Pois", t => t.Poi_Id)
+                .Index(t => t.Category_Id)
+                .Index(t => t.Poi_Id);
             
             CreateTable(
                 "dbo.Inscriptions",
@@ -45,33 +54,24 @@ namespace GestionDesCourses.Migrations
                 .Index(t => t.RaceId);
             
             CreateTable(
-                "dbo.Races",
-                c => new
-                    {
-                        Id = c.Int(nullable: false, identity: true),
-                        DateEnd = c.DateTime(nullable: false),
-                        DateStart = c.DateTime(nullable: false),
-                        Description = c.String(nullable: false, maxLength: 200),
-                        Price = c.Single(nullable: false),
-                        Title = c.String(nullable: false, maxLength: 25),
-                        ZipCode = c.String(nullable: false),
-                        Category_Id = c.Int(),
-                    })
-                .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Categories", t => t.Category_Id)
-                .Index(t => t.Category_Id);
-            
-            CreateTable(
                 "dbo.Pois",
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
                         Description = c.String(),
-                        Race_Id = c.Int(),
                     })
-                .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Races", t => t.Race_Id)
-                .Index(t => t.Race_Id);
+                .PrimaryKey(t => t.Id);
+            
+            CreateTable(
+                "dbo.DisplayConfigurations",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        DeviceName = c.String(),
+                        SpeedAvg = c.Boolean(nullable: false),
+                        SpeedMax = c.Boolean(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id);
             
             CreateTable(
                 "dbo.AspNetRoles",
@@ -130,7 +130,6 @@ namespace GestionDesCourses.Migrations
                         Id = c.String(nullable: false, maxLength: 128),
                         FirstName = c.String(),
                         LastName = c.String(),
-                        Phone = c.String(),
                         BirthDate = c.DateTime(),
                         RoleUser = c.String(),
                         RoleAdministrateur = c.String(),
@@ -175,6 +174,19 @@ namespace GestionDesCourses.Migrations
                 .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
                 .Index(t => t.UserId);
             
+            CreateTable(
+                "dbo.RacePois",
+                c => new
+                    {
+                        Race_Id = c.Int(nullable: false),
+                        Poi_Id = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => new { t.Race_Id, t.Poi_Id })
+                .ForeignKey("dbo.Races", t => t.Race_Id, cascadeDelete: true)
+                .ForeignKey("dbo.Pois", t => t.Poi_Id, cascadeDelete: true)
+                .Index(t => t.Race_Id)
+                .Index(t => t.Poi_Id);
+            
         }
         
         public override void Down()
@@ -183,18 +195,23 @@ namespace GestionDesCourses.Migrations
             DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
-            DropForeignKey("dbo.Pois", "Race_Id", "dbo.Races");
+            DropForeignKey("dbo.RacePois", "Poi_Id", "dbo.Pois");
+            DropForeignKey("dbo.RacePois", "Race_Id", "dbo.Races");
+            DropForeignKey("dbo.Races", "Poi_Id", "dbo.Pois");
             DropForeignKey("dbo.Inscriptions", "RaceId", "dbo.Races");
             DropForeignKey("dbo.Races", "Category_Id", "dbo.Categories");
+            DropIndex("dbo.RacePois", new[] { "Poi_Id" });
+            DropIndex("dbo.RacePois", new[] { "Race_Id" });
             DropIndex("dbo.AspNetUserLogins", new[] { "UserId" });
             DropIndex("dbo.AspNetUserClaims", new[] { "UserId" });
             DropIndex("dbo.AspNetUsers", "UserNameIndex");
             DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
             DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
             DropIndex("dbo.AspNetRoles", "RoleNameIndex");
-            DropIndex("dbo.Pois", new[] { "Race_Id" });
-            DropIndex("dbo.Races", new[] { "Category_Id" });
             DropIndex("dbo.Inscriptions", new[] { "RaceId" });
+            DropIndex("dbo.Races", new[] { "Poi_Id" });
+            DropIndex("dbo.Races", new[] { "Category_Id" });
+            DropTable("dbo.RacePois");
             DropTable("dbo.AspNetUserLogins");
             DropTable("dbo.AspNetUserClaims");
             DropTable("dbo.AspNetUsers");
@@ -203,10 +220,10 @@ namespace GestionDesCourses.Migrations
             DropTable("dbo.TypeInscriptions");
             DropTable("dbo.AspNetUserRoles");
             DropTable("dbo.AspNetRoles");
-            DropTable("dbo.Pois");
-            DropTable("dbo.Races");
-            DropTable("dbo.Inscriptions");
             DropTable("dbo.DisplayConfigurations");
+            DropTable("dbo.Pois");
+            DropTable("dbo.Inscriptions");
+            DropTable("dbo.Races");
             DropTable("dbo.Categories");
         }
     }

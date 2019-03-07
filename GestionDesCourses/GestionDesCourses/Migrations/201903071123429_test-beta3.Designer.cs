@@ -6,14 +6,14 @@ namespace GestionDesCourses.Migrations
     using System.Data.Entity.Migrations.Infrastructure;
     using System.Resources;
     
-    [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class update_racecategoryoneToMany : IMigrationMetadata
+    [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
+    public sealed partial class testbeta3 : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(update_racecategoryoneToMany));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(testbeta3));
         
         string IMigrationMetadata.Id
         {
-            get { return "201903061548242_update_race-category-oneToMany"; }
+            get { return "201903071123429_test-beta3"; }
         }
         
         string IMigrationMetadata.Source

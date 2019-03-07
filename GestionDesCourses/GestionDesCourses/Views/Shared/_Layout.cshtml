@@ -32,8 +32,9 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                @if (HttpContext.Current.User.Identity.IsAuthenticated)
-                {
+              
+            @if (Request.IsAuthenticated)
+            {
                     <li>@Html.ActionLink("Accueil", "Index", "Home")</li>
                     <li>@Html.ActionLink("À propos de", "About", "Home")</li>
 

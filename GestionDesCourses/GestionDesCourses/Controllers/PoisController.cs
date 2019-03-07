@@ -12,6 +12,7 @@ using System.IO;
 
 namespace GestionDesCourses.Controllers
 {
+    [Authorize]
     public class PoisController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
