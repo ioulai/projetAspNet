@@ -449,7 +449,6 @@
     <Content Include="Views\Pois\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
     <Folder Include="Content\GPX\" />
     <Folder Include="Debug\" />
   </ItemGroup>
@@ -467,9 +466,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201903041315276_updateDatabase.resx">
-      <DependentUpon>201903041315276_updateDatabase.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201903060947145_update_race-poi.resx">
       <DependentUpon>201903060947145_update_race-poi.cs</DependentUpon>
     </EmbeddedResource>
@@ -482,7 +478,6 @@
     <EmbeddedResource Include="Migrations\201903070817547_update_Test.resx">
       <DependentUpon>201903070817547_update_Test.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="obj\Debug\GestionDesCourses.Migrations.updateDatabase.resources" />
     <EmbeddedResource Include="obj\Debug\GestionDesCourses.Migrations.update_racepoi.resources" />
   </ItemGroup>
   <PropertyGroup>
