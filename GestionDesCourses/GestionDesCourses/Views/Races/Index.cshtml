@@ -14,6 +14,16 @@
   
 </p>
 
+@if (null != TempData["alertMessage"])
+{
+    <div class="alert alert-danger alert-dismissible" role="alert">
+        @TempData["alertMessage"]
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+}
+
 <table class="table">
     <tr>
         <th>
@@ -85,9 +95,17 @@
             {
                  @Html.ActionLink("Supprimer", "Delete", new { id = item.Id }, new { @class = "btn btn-default" }) 
             }
-            @Html.ActionLink("S'inscrire", "Inscription", new { id = item.Id , amount = item.Price, title = item.Category.Title, end = item.DateEnd, start = item.DateStart }, new { @class = "btn btn-default" })
+            @*@Html.ActionLink("S'inscrire", "Inscription", new { id = item.Id , amount = item.Price, title = item.Category.Title, end = item.DateEnd, start = item.DateStart }, new { @class = "btn btn-default" })*@
+
+            @* on envoie que l'id de la course seul, c'est suffisant*@
+            @Html.ActionLink("S'inscrire", "Inscription", new { id = item.Id }, new { @class = "btn btn-default" })
+
         </td>
     </tr>
 }
-
 </table>
+@Html.ActionLink("Voir mes inscriptions", "Liste_Inscription")
+<p>
+    @* lien à enlever lorsque la gestion des roles sera finie *@
+    @Html.ActionLink("Enregister une nouvelle course", "Create")
+</p>

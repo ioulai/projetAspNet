@@ -85,9 +85,14 @@
     }
     @Html.ActionLink("S'inscrire", "Inscription", new { id = Model.Race.Id, amount = Model.Race.Price, title = Model.Race.Category.Title, end = Model.Race.DateEnd, start = Model.Race.DateStart }, new { @class = "btn btn-default" })
     @Html.ActionLink("Annuler", "Index", "Races", new { @class = "btn btn-default" })
+    @* Ci dessous : bouton qui envoie vers la liste des participants inscrits à la course : A FAIRE
+        Visible que si admin? *@
+    @Html.ActionLink("Voir la liste des participants", "Details", new { id = Model.Race.Id }, new { @class = "btn btn-default" })
 </p>
 <p>
-    @Html.ActionLink("Retour à la liste", "Index")
+    @Html.ActionLink("Retour à la liste des courses", "Index")
+    <br/>
+    @Html.ActionLink("Retour à la liste des inscriptions", "Liste_Inscription")
 </p>
 
 <script>

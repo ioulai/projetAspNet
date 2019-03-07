@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -51,11 +52,25 @@ namespace GestionDesCourses.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Categories.Add(category);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+                try
+                {
+                    // on vérifie la validité des données
+                    if (!CheckRulesCreateEdit(category))
+                    {
+                        throw new Exception("Une ou plusieurs rêgles métiers ne sont pas respectées sur une création d'une catégorie");
+                    }
+                    db.Categories.Add(category);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
 
+                catch (Exception ex)
+                {
+                    Debug.WriteLine(ex.Message);
+                    // Si nous avons rencontré une erreur, il faut recharger la page de création
+                    return View(category);
+                }
+            }
             return View(category);
         }
 
@@ -83,9 +98,27 @@ namespace GestionDesCourses.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(category).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                try
+                {
+                    // on vérifie la validité des données
+                    if (!CheckRulesCreateEdit(category))
+                    {
+                        throw new Exception("Une ou plusieurs rêgles métiers ne sont pas respectées sur une création d'une catégorie");
+                    }
+
+                    var categoriedb = db.Categories.FirstOrDefault(i => i.Id == category.Id);
+                    categoriedb.Title = category.Title;
+                    
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+
+                catch (Exception ex)
+                {
+                    Debug.WriteLine(ex.Message);
+                    // Si nous avons rencontré une erreur, il faut recharger la page
+                    return View(category);
+                }
             }
             return View(category);
         }
@@ -102,8 +135,25 @@ namespace GestionDesCourses.Controllers
             {
                 return HttpNotFound();
             }
-            return View(category);
-        }
+
+            try
+            {
+                // on vérifie qu'il n'y a aucune course associée à cette catégorie
+                if (!CheckRulesDelete(id.Value))
+                {
+                    throw new Exception("Une ou plusieurs rêgles métiers ne sont pas respectées sur une suppression d'une catégorie");
+                }
+                return View(category);
+            }
+
+            catch (Exception ex)
+            {
+                // si on a rencontré une erreur, on affiche un message d'alerte
+                Debug.WriteLine(ex.Message);
+                TempData["alertMessage"] = ViewData.ModelState["ErreurSuppressionCategorie"].Errors[0].ErrorMessage;
+                return RedirectToAction("Index");
+            }
+    }
 
         // POST: Categories/Delete/5
         [HttpPost, ActionName("Delete")]
@@ -123,6 +173,36 @@ namespace GestionDesCourses.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        private bool CheckRulesCreateEdit(Category categorie)
+        {
+            var brokenRules = 0;
+
+            // le titre doit etre unique
+            List<Category> categoriesExistantes = db.Categories.ToList();
+            if (categoriesExistantes.Any(p => p.Title.ToUpper() == categorie.Title.ToUpper() && p.Id != categorie.Id))
+            {
+                ModelState.AddModelError("Title", "Il existe déjà une categorie portant ce titre");
+                brokenRules++;
+            }
+            
+            return brokenRules == 0;
+        }
+
+        private bool CheckRulesDelete(int id)
+        {
+            var brokenRules = 0;
+
+            // il ne doit y avoir aucune course de cette catégorie en base
+            List<Race> racesExistantes = db.Races.Include(z => z.Category).ToList();
+            if (racesExistantes.Any(r => r.Category.Id == id))
+            {
+                ModelState.AddModelError("ErreurSuppressionCategorie", "Vous ne pouvez pas supprimer cette catégorie car des courses y sont encore associées");
+                brokenRules++;
+            }
+
+            return brokenRules == 0;
         }
     }
 }
