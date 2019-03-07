@@ -12,6 +12,7 @@ using GestionDesCourses.Models;
 
 namespace GestionDesCourses.Controllers
 {
+    [Authorize(Roles ="Admin,SA")]
     public class CategoriesController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();

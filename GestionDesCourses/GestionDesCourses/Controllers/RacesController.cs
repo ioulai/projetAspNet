@@ -301,7 +301,7 @@ namespace GestionDesCourses.Controllers
             return brokenRules == 0;
         }
 
-        [Authorize(Roles = "User")]
+        [Authorize(Roles = "user")]
         public ActionResult Inscription(int id, float amount, string title, DateTime start, DateTime end)
         {
 
@@ -343,7 +343,7 @@ namespace GestionDesCourses.Controllers
 
             return RedirectToAction("Index");
         }
-        [Authorize(Roles = "User")]
+        [Authorize(Roles = "user")]
         public ActionResult Liste_Inscription()
         {
             var u = User.Identity.GetUserId();
@@ -354,7 +354,7 @@ namespace GestionDesCourses.Controllers
             return View(lesInscriptions.Where(id => id.IdentityModelId == u).ToList());
 
         }
-        [Authorize(Roles = "User")]
+        [Authorize(Roles = "user")]
         public ActionResult Desinscription(int id)
         {
             Inscription inscription = db.Inscriptions.Find(id);

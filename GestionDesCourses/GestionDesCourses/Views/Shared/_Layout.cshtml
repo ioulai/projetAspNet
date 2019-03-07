@@ -39,9 +39,19 @@
                     <li>@Html.ActionLink("À propos de", "About", "Home")</li>
 
                     <li>@Html.ActionLink("Courses", "Index", "Races")</li>
+                    
+
+                if (User.IsInRole("Admin") || User.IsInRole("SA"))
+                {
                     <li>@Html.ActionLink("Categories", "Index", "Categories")</li>
                     <li>@Html.ActionLink("POI", "Index", "Pois")</li>
-                    }
+                }
+                else
+                {
+                    <li>@Html.ActionLink("Inscription", "Liste_Inscription", "Races")</li>
+                }
+
+            }
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                 }
                 </ul>

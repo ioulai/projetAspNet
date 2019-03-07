@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,7 +15,7 @@ namespace BO
         }
 
         public int Id { get; set; } // l'id de l'inscription
-
+        [Display(Name = "prix")]
         public float Amount { get; set; } // ??? 
 
         public string IdentityModelId { get; set; } // l'id de la personne qui s'inscrit

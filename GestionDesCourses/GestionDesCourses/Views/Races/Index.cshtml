@@ -1,13 +1,13 @@
 @model IEnumerable<BO.Race>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Courses";
 }
 
 <h2>Liste des courses</h2>
 
 <p>
-@if (User.IsInRole("Admin"))
+   @if (User.IsInRole("Admin") || User.IsInRole("SA"))
 {
     @Html.ActionLink("Ajouter une nouvelle course", "Create", null, new { @class = "btn btn-default" })
 }
@@ -106,6 +106,4 @@
 </table>
 @Html.ActionLink("Voir mes inscriptions", "Liste_Inscription")
 <p>
-    @* lien à enlever lorsque la gestion des roles sera finie *@
-    @Html.ActionLink("Enregister une nouvelle course", "Create")
 </p>
