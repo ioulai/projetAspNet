@@ -3,6 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Data.Entity;
+using BO;
 
 namespace GestionDesCourses.Models
 {
@@ -29,6 +31,17 @@ namespace GestionDesCourses.Models
         public System.Data.Entity.DbSet<BO.UserRole> UserRoles { get; set; }
 
         public System.Data.Entity.DbSet<BO.Race> Races { get; set; }
+
+        public System.Data.Entity.DbSet<BO.Poi> Pois { get; set; }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<Race>().HasMany(p => p.Pois).WithMany();
+            modelBuilder.Entity<Race>().HasRequired<Category>(c => c.Category)
+                .WithMany(r => r.Races);
+        }
+
 
         //public System.Data.Entity.DbSet<GestionDesCourses.Models.ApplicationUser> ApplicationUsers { get; set; }
     }

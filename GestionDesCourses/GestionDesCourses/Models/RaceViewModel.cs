@@ -13,6 +13,10 @@ namespace GestionDesCourses.Models
 
         public List<Category> Categories { get; set; } // = new List<Category>();
 
+        public List<Poi> lesPoisVM { get; set; }
+
+        public int? IdPoisSelected { get; set; }
+
         public int? IdSelectedCategory { get; set; }
     }
 }

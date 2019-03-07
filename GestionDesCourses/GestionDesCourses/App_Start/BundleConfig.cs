@@ -11,6 +11,8 @@ namespace GestionDesCourses
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                         "~/Scripts/jquery-{version}.js",
                         "~/Scripts/Jquery-ui-{version}.js"));
+            bundles.Add(new ScriptBundle("~/bundles/script-perso").Include(                
+                "~/Scripts/script_perso/configMapCourse.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));

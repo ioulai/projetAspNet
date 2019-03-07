@@ -43,7 +43,8 @@ namespace GestionDesCourses.Controllers
             }
 
             RaceViewModel raceVM = new RaceViewModel();
-            raceVM.Race = db.Races.Include(c => c.Category).SingleOrDefault(c => c.Id == id);
+            raceVM.Race = db.Races.Include("Category").Include("Pois").SingleOrDefault(c => c.Id == id);
+            
 
             return View(raceVM);
         }
@@ -55,6 +56,7 @@ namespace GestionDesCourses.Controllers
             // création du ViewModel nécessaire pour porter la liste des catégories et l'id de la categorie choisie en plus de la course
             var raceVM = new RaceViewModel();
             raceVM.Categories = lesCategoriesDispo;
+            raceVM.lesPoisVM = db.Pois.ToList();
 
             return View(raceVM);
         }
@@ -78,14 +80,25 @@ namespace GestionDesCourses.Controllers
                     }
 
                     // on vérifie qu'une catégorie ai été choisie
-                    if (raceVM.IdSelectedCategory.HasValue)
+                    if (raceVM.IdSelectedCategory.HasValue && raceVM.IdPoisSelected.HasValue)
                     {
                         // on assigne la catégorie dont l'Id à été choisi pour la course
                         raceVM.Race.Category = db.Categories.FirstOrDefault(a => a.Id == raceVM.IdSelectedCategory.Value);
+
+                        //on assigne à la POI l'ID de la course
+                        var lePoi = db.Pois.Find(raceVM.IdPoisSelected);
+                        if(raceVM.Race.Pois == null)
+                        {
+                            raceVM.Race.Pois = new List<Poi>();
+                            
+                        }
+                        raceVM.Race.Pois.Add(lePoi);
+
                     }
 
                     // On ajoute la nouvelle course au DbSet, puis on enregistre les changements en base
                     db.Races.Add(raceVM.Race);
+                    
                     db.SaveChanges();
                     return RedirectToAction("Index");
                 
@@ -96,10 +109,12 @@ namespace GestionDesCourses.Controllers
                     Debug.WriteLine(ex.Message);
                     // Si nous avons rencontré une erreur, il faut recharger la page de création, de ce fait il nous faut ré-alimenter le Viewmodel avant de le passer à la vue
                     raceVM.Categories = lesCategoriesDispo;
+                    raceVM.lesPoisVM = db.Pois.ToList();
                     return View(raceVM);
                 }
             }
             raceVM.Categories = lesCategoriesDispo;
+            raceVM.lesPoisVM = db.Pois.ToList();
             return View(raceVM);  
         }
 
